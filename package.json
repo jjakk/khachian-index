@@ -1,0 +1,25 @@
+{
+  "name": "stock-trading-bot",
+  "version": "1.0.0",
+  "description": "This is a basic stock trading bot using the Alpaca API",
+  "main": "the.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjakk/stock-trading-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjakk/stock-trading-bot/issues"
+  },
+  "homepage": "https://github.com/jjakk/stock-trading-bot#readme",
+  "dependencies": {
+    "@alpacahq/alpaca-trade-api": "^2.16.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}
