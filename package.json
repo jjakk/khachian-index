@@ -4,6 +4,7 @@
   "description": "This is a basic stock trading bot using the Alpaca API",
   "main": "the.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
