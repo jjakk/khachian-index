@@ -1,0 +1,17 @@
+body{
+    font-family: "Open Sans", arial;
+}
+
+h1{
+    font-weight: 600;
+}
+
+table, tr, th, td{
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+th{
+    background-color: #eee;
+}
