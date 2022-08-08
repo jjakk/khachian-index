@@ -31,18 +31,16 @@ app.get("/", async (req, res) => {
 
 app.get("/customPortfolio", async (req, res) => {
     const account = await alpaca.getAccount();
-    res.render('customPortfolio', {
-        account: {
-            ...account,
-        }
-    });
+    res.render('customPortfolio');
 });
 
 app.post("/customPortfolio", async (req, res) => {
     let { symbols } = req.body;
     symbols = symbols.split(",").map(c=>c.trim())
     const scores = await getScores(symbols);
-    res.send(scores);
+    res.render('customPortfolio', {
+        scores
+    });
 });
 
 app.get("/score/:symbol", async (req, res) => {

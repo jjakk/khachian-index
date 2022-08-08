@@ -8,11 +8,26 @@ body
     header
         h1 Rank your portfolio positions using the Khachian Index
     main
-        form(action="/customPortfolio", method="post")
-            textarea(type="text", name="symbols", placeholder="Enter symbols separated by commas")
+        if !scores
+            form(action="/customPortfolio", method="post")
+                textarea(type="text", name="symbols", placeholder="Enter symbols separated by commas")
+                br
+                br
+                input(type="submit", value="Submit")
+        else
+            table
+                tr
+                    th Symbol
+                    th KI Score
+                each score in scores 
+                    tr
+                        td #{score.symbol}
+                        td #{score.score}
+            br
+            a(href="/customPortfolio") Input again
             br
             br
-            input(type="submit", value="Submit")
+        a(href="/") Back to home page
         
 
 

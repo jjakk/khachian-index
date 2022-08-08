@@ -43,8 +43,9 @@ const getScore = async (symbol) => {
         if(m.value === null) return t;
         else return m.weight + t;
     }, 0);
+    const finalScore = score / maxScore;
 
-    return score/maxScore;
+    return finalScore.toFixed(4);
 };
 
 const sumMetricScores = (metrics) => {
