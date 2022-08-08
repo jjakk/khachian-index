@@ -1,6 +1,7 @@
 const express = require("express");
 const Alpaca = require("@alpacahq/alpaca-trade-api");
 const dotenv = require("dotenv");
+const getScore = require("./indexAlgorithm/getScore");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -22,6 +23,20 @@ app.get("/", async (req, res) => {
             ...account,
         }
     });
+});
+
+app.get("/score/:symbol", async (req, res) => {
+    try{
+        const {
+            symbol
+        } = req.params;
+        const score = await getScore(symbol);
+
+        res.status(200).send(`${score}`);
+    }
+    catch(err){
+        res.send(err.message);
+    }
 });
 
 app.put("/update", async (req, res) => {

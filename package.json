@@ -21,6 +21,7 @@
     "@alpacahq/alpaca-trade-api": "^2.16.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "yahoo-stock-api": "^1.1.10"
   }
 }
