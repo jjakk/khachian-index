@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jjakk/stock-trading-bot#readme",
   "dependencies": {
     "@alpacahq/alpaca-trade-api": "^2.16.1",
+    "csvtojson": "^2.0.10",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "pug": "^3.0.2",

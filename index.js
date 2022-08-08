@@ -1,7 +1,9 @@
 const express = require("express");
 const Alpaca = require("@alpacahq/alpaca-trade-api");
 const dotenv = require("dotenv");
+const csv = require('csvtojson')
 const getScore = require("./indexAlgorithm/getScore");
+const getScores = require("./indexAlgorithm/getScores");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -35,12 +37,21 @@ app.get("/score/:symbol", async (req, res) => {
         res.status(200).send(`${score}`);
     }
     catch(err){
-        res.send(err.message);
+        res.status(err.status || 500).send(err.message);
     }
 });
 
-app.put("/update", async (req, res) => {
-
+app.get("/update", async (req, res) => {
+    try{
+        
+        let allSymbols = await csv().fromFile("./indexAlgorithm/allTickers.csv");
+        allSymbols = allSymbols.map(s=>s.Symbol);
+        const scores = await getScores(allSymbols);
+        res.send(scores);
+    }
+    catch(err){
+        res.send(err.status || 500).send(err.message);
+    }
 });
 
 app.listen(PORT, () => {
