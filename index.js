@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 8000;
 dotenv.config();
 app.set('view engine', 'pug')
 app.use(express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 const alpaca = new Alpaca({
     keyId: process.env.ALPACA_KEY,
@@ -25,6 +27,22 @@ app.get("/", async (req, res) => {
             ...account,
         }
     });
+});
+
+app.get("/customPortfolio", async (req, res) => {
+    const account = await alpaca.getAccount();
+    res.render('customPortfolio', {
+        account: {
+            ...account,
+        }
+    });
+});
+
+app.post("/customPortfolio", async (req, res) => {
+    let { symbols } = req.body;
+    symbols = symbols.split(",").map(c=>c.trim())
+    const scores = await getScores(symbols);
+    res.send(scores);
 });
 
 app.get("/score/:symbol", async (req, res) => {
