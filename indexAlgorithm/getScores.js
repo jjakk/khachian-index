@@ -8,6 +8,11 @@ const getScores = async (symbols) => {
             score: await getScore(symbol)
         });
     };
+    scores = scores.sort((a,b)=>
+        (b.score || 0)
+        -
+        (a.score || 0)
+    );
     return scores;
 };
 

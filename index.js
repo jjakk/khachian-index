@@ -45,8 +45,8 @@ app.get("/update", async (req, res) => {
     try{
         
         let allSymbols = await csv().fromFile("./indexAlgorithm/allTickers.csv");
-        allSymbols = allSymbols.map(s=>s.Symbol);
-        const scores = await getScores(allSymbols);
+        allSymbols = allSymbols.map(s=>s.Symbol).slice(0,20);
+        let scores = await getScores(allSymbols);
         res.send(scores);
     }
     catch(err){
