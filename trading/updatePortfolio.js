@@ -18,9 +18,10 @@ const alpaca = new Alpaca({
             .map(s=>s.Symbol)
             .slice(0,100);
         let scores = await getScores(allSymbols);
+        await alpaca.closeAllPositions();
         const scoreSum = scores.reduce((t,b)=>t+parseFloat(b.score || 0),0);
         for(const score of scores){
-            const portfolioDiversity = (score.score||0)/scoreSum;  
+            const portfolioDiversity = (score.score||0)/scoreSum;
             const order = await alpaca.createOrder({
                 symbol: score.symbol,
                 notional: portfolioDiversity*buyingPower,

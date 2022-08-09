@@ -14,7 +14,8 @@ body
                 th Percent of Total Holdings
             for holding in topTenHoldings
                 tr
-                    td #{holding.symbol}
+                    td
+                        a(href=`https://finance.yahoo.com/quote/${holding.symbol}` target="_blank") #{holding.symbol}
                     td #{holding.portfolioDiversity}%
         br
         a(href="customPortfolio") Check out how your portfolio positions rank
