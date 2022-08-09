@@ -5,6 +5,7 @@
   "main": "the.js",
   "scripts": {
     "start": "node index.js",
+    "updatePortfolio": "node ./trading/updatePortfolio.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

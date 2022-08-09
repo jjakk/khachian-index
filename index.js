@@ -1,7 +1,6 @@
 const express = require("express");
 const Alpaca = require("@alpacahq/alpaca-trade-api");
 const dotenv = require("dotenv");
-const csv = require('csvtojson')
 const getScore = require("./indexAlgorithm/getScore");
 const getScores = require("./indexAlgorithm/getScores");
 const app = express();
@@ -22,10 +21,15 @@ const alpaca = new Alpaca({
 
 app.get("/", async (req, res) => {
     const account = await alpaca.getAccount();
+    let positions = await alpaca.getPositions();
+    positions = positions
+        .sort((a,b) => b.market_value - a.market_value)
+        .map(c=>{return{
+            symbol: c.symbol,
+            portfolioDiversity: ((c.market_value/account.portfolio_value)*100).toFixed(2)
+        }});
     res.render('index', {
-        account: {
-            ...account,
-        }
+        topTenHoldings: positions.slice(0, 10)
     });
 });
 
@@ -57,33 +61,6 @@ app.get("/score/:symbol", async (req, res) => {
     }
 });
 
-app.get("/update", async (req, res) => {
-    try{
-        
-        let allSymbols = await csv().fromFile("./indexAlgorithm/allTickers.csv");
-        allSymbols = allSymbols
-            .sort((a,b) => parseInt(b["Market Cap"] || 0) - parseInt(a["Market Cap"] || 0))
-            .map(s=>s.Symbol)
-            .slice(0,25);
-        let scores = await getScores(allSymbols);
-        res.send(scores);
-    }
-    catch(err){
-        res.send(err.status || 500).send(err.message);
-    }
-});
-
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-/*
-// Order code
-const order = await alpaca.createOrder({
-    symbol: "MSFT",
-    notional: 1,
-    side: "buy",
-    type: "market",
-    time_in_force: "day"
-});
-*/

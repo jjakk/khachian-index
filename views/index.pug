@@ -10,9 +10,12 @@ body
         h3 Top 10 Holdings
         table
             tr
-                th Name
                 th Symbol
                 th Percent of Total Holdings
+            for holding in topTenHoldings
+                tr
+                    td #{holding.symbol}
+                    td #{holding.portfolioDiversity}%
         br
         a(href="customPortfolio") Check out how your portfolio positions rank
         
