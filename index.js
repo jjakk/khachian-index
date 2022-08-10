@@ -43,6 +43,10 @@ app.get("/customPortfolio", async (req, res) => {
     res.render('customPortfolio');
 });
 
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+
 app.post("/customPortfolio", async (req, res) => {
     let { symbols } = req.body;
     symbols = symbols.split(",").map(c=>c.trim())
