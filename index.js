@@ -31,7 +31,9 @@ app.get("/", async (req, res) => {
     res.render('index', {
         totalAppreciationPercentage: (
             (
-                (account.portfolio_value - 100000) / account.portfolio_value
+                (
+                    account.portfolio_value - 100000
+                ) /account.portfolio_value
             ) * 100
         ).toFixed(2),
         topTenHoldings: positions.slice(0, 10)
