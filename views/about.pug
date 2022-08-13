@@ -3,6 +3,7 @@ head
     link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
     link(href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet")
     link(rel="stylesheet" href="/css/index.css")
+    link(rel="stylesheet" href="/css/about.css")
 body
     header
         h1 How the Khachian Index is Calculated
@@ -11,8 +12,10 @@ body
         ol
             li each variable is given a minimum and maximum value.
             li Within that range, it is given a score based on how closer it is to the 
-                | desired value. P/E for example would desire the minimum value.
-                | A score closer to 1 would be better.
+                | desired value. P/E for example would desire the minimum value, where 
+                | as a variable like Dividend Yeild would desire the maximum value.
+                | A score closer to 1 would indicates a variable is closer to it's
+                | desired value.
             li That score is then multiplied by its weight.
             li Each variable's score is added to a sum which is then divided by the maximum 
                 | possible score for the stock.
