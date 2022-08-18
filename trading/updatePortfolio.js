@@ -8,10 +8,11 @@ const alpaca = new Alpaca({
     paper: true
 });
 
+const sleep = time => new Promise(resolve => setTimeout(resolve, time));
+
 (async function(){
     try{
         const account = await alpaca.getAccount();
-        const buyingPower = account.non_marginable_buying_power;
         let allSymbols = await csv().fromFile("./indexAlgorithm/allTickers.csv");
         allSymbols = allSymbols
             .sort((a,b) => parseInt(b["Market Cap"] || 0) - parseInt(a["Market Cap"] || 0))
@@ -19,6 +20,7 @@ const alpaca = new Alpaca({
             .slice(0,100);
         let scores = await getScores(allSymbols);
         await alpaca.closeAllPositions();
+        const buyingPower = account.non_marginable_buying_power;
         const scoreSum = scores.reduce((t,b)=>t+parseFloat(b.score || 0),0);
         for(const score of scores){
             const portfolioDiversity = (score.score||0)/scoreSum;
@@ -29,6 +31,7 @@ const alpaca = new Alpaca({
                 type: "market",
                 time_in_force: "day"
             });
+            await sleep(100);
             console.log(`${order.symbol}, ${order.notional}`);
         }
     }
