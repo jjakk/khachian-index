@@ -20,20 +20,29 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
             .slice(0,100);
         let scores = await getScores(allSymbols);
         await alpaca.closeAllPositions();
-        const buyingPower = account.non_marginable_buying_power;
+        const cash = account.cash;
         const scoreSum = scores.reduce((t,b)=>t+parseFloat(b.score || 0),0);
         for(const score of scores){
+            console.log(score.symbol, score.score);
             const portfolioDiversity = (score.score||0)/scoreSum;
-            const order = await alpaca.createOrder({
+            console.log({
                 symbol: score.symbol,
-                notional: portfolioDiversity*buyingPower,
+                portfolioDiversity: portfolioDiversity,
+                cash: cash,
                 side: "buy",
                 type: "market",
                 time_in_force: "day"
             });
-            await sleep(100);
-            console.log(`${order.symbol}, ${order.notional}`);
+            await alpaca.createOrder({
+                symbol: score.symbol,
+                notional: portfolioDiversity*cash,
+                side: "buy",
+                type: "market",
+                time_in_force: "day"
+            });
+            console.log(score.symbol, portfolioDiversity*cash);
         }
+        console.log("Portfolio updated");
     }
     catch(err){
         console.log(err.message);

@@ -11,7 +11,7 @@ const getScores = async (symbols) => {
             score: currentScore
         });
 
-        console.log(`${(i/symbols.length)*100}% Done retrieving scores`);
+        console.log(`${((i/symbols.length)*100).toFixed(0)}% Done retrieving scores`);
         i++;
     };
     scores = scores.sort((a,b)=>
