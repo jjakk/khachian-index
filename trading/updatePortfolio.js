@@ -33,8 +33,8 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
                     type: "market",
                     time_in_force: "day"
                 });
+                console.log(score.symbol, purchaseCost);
             }
-            console.log(score.symbol, purchaseCost);
         }
         console.log("Portfolio updated");
     }
