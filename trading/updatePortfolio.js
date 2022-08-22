@@ -19,8 +19,7 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
             .slice(0,100);
         let scores = await getScores(allSymbols);
         await alpaca.closeAllPositions();
-        const account = await alpaca.getAccount();
-        const cash = account.cash;
+        const cash = (await alpaca.getAccount()).cash;
         const scoreSum = scores.reduce((t,b)=>t+parseFloat(b.score || 0),0);
         for(const score of scores){
             const portfolioDiversity = (score.score||0)/scoreSum;
