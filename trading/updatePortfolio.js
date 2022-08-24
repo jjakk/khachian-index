@@ -17,13 +17,18 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
             .sort((a,b) => parseInt(b["Market Cap"] || 0) - parseInt(a["Market Cap"] || 0))
             .map(s=>s.Symbol)
             .slice(0,100);
+        
         let scores = await getScores(allSymbols);
+
         await alpaca.closeAllPositions();
         const cash = (await alpaca.getAccount()).cash;
+
         const scoreSum = scores.reduce((t,b)=>t+parseFloat(b.score || 0),0);
+
         for(const score of scores){
             const portfolioDiversity = (score.score||0)/scoreSum;
             const purchaseCost = portfolioDiversity*cash;
+            
             if(purchaseCost > 0){
                 await alpaca.createOrder({
                     symbol: score.symbol,
