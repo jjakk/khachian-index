@@ -28,7 +28,7 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
         for(const score of scores){
             const portfolioDiversity = (score.score||0)/scoreSum;
             const purchaseCost = portfolioDiversity*cash;
-            
+
             if(purchaseCost > 0){
                 await alpaca.createOrder({
                     symbol: score.symbol,
@@ -37,7 +37,7 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
                     type: "market",
                     time_in_force: "day"
                 });
-                console.log(score.symbol, purchaseCost.toFixed(2));
+                console.log(`purchased $${purchaseCost.toFixed(2)} of ${score.symbol}`);
             }
         }
         console.log("Portfolio updated");
