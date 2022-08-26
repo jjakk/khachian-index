@@ -8,8 +8,6 @@ const alpaca = new Alpaca({
     paper: true
 });
 
-const sleep = time => new Promise(resolve => setTimeout(resolve, time));
-
 (async function(){
     try{
         let allSymbols = await csv().fromFile("./indexAlgorithm/allTickers.csv");
