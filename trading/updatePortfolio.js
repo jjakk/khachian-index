@@ -20,7 +20,6 @@ const alpaca = new Alpaca({
 
         await alpaca.closeAllPositions();
         const cash = (await alpaca.getAccount()).cash;
-
         const scoreSum = scores.reduce((t,b)=>t+parseFloat(b.score || 0),0);
 
         for(const score of scores){
