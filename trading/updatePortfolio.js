@@ -10,8 +10,9 @@ const alpaca = new Alpaca({
 
 (async function(){
     try{
-        let allSymbols = await csv().fromFile("./indexAlgorithm/allTickers.csv");
-        allSymbols = allSymbols
+        const allSymbols = (
+            await csv().fromFile("./indexAlgorithm/allTickers.csv")
+        )
             .sort((a,b) => parseInt(b["Market Cap"] || 0) - parseInt(a["Market Cap"] || 0))
             .map(s=>s.Symbol)
             .slice(0,100);
