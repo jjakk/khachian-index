@@ -35,6 +35,7 @@ const alpaca = new Alpaca({
                     type: "market",
                     time_in_force: "day"
                 });
+                
                 console.log(`purchased $${purchaseCost.toFixed(2)} of ${score.symbol}`);
             }
         }
