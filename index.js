@@ -6,7 +6,7 @@ const getScores = require("./indexAlgorithm/getScores");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Setup
+// Settings
 dotenv.config();
 app.set('view engine', 'pug')
 app.use(express.static('public'))
