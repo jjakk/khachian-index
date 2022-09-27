@@ -36,7 +36,8 @@ app.get("/", async (req, res) => {
                 ) /account.portfolio_value
             ) * 100
         ).toFixed(2),
-        topTenHoldings: positions.slice(0, 10)
+        topTenHoldings: positions.slice(0, 10),
+        allHoldings: positions
     });
 });
 
