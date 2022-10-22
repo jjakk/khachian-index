@@ -20,7 +20,10 @@ body
                     td #{holding.portfolioDiversity}%
         br
         button(onclick="openHoldings()") Show all holdings
-        p Total Portfolio Appreciation: #{totalAppreciationPercentage}%
+        p
+            | Total Portfolio Appreciation: #{totalAppreciationPercentage}%
+            | br
+            | Index Inception Date: 8/8/2022
         a(href="about") Learn how this index is calculated
         div#overlay
             div#overlay-box
