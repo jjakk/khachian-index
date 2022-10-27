@@ -19,8 +19,7 @@ body
                         a(href=`https://finance.yahoo.com/quote/${holding.symbol}` target="_blank") #{holding.symbol}
                     td #{holding.portfolioDiversity}%
         br
-        button(onclick="openHoldings()") Show all holdings
-        p #{allHoldings.length} holdings
+        button(onclick="openHoldings()") Show all #{allHoldings.length} holdings
         p Performance since inception: #{totalAppreciationPercentage}%
         p Index inception date: 8/8/2022
         a(href="about") Learn how this index is calculated
